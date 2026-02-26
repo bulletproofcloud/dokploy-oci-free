@@ -1,6 +1,6 @@
 variable "ssh_authorized_keys" {
-  description = "SSH public key for instances. For example: ssh-rsa AAEAAAA....3R ssh-key-2024-09-03"
-  type        = string
+  description = "One or more SSH public keys for instance access. For example: [\"ssh-rsa AAAA...key1\", \"ssh-rsa AAAA...key2\"]"
+  type        = list(string)
 }
 
 variable "compartment_id" {
