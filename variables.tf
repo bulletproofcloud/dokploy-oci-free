@@ -46,3 +46,9 @@ variable "ocpus" {
   type        = string
   default     = "1" # OCI Free
 }
+
+variable "admin_cidr" {
+  description = "CIDR block allowed to access the Dokploy admin dashboard (port 3000). Restrict this to your IP for better security, e.g. '1.2.3.4/32'. Defaults to open — change before production use."
+  type        = string
+  default     = "0.0.0.0/0"
+}
