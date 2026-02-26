@@ -51,7 +51,7 @@ To begin deploying applications, you need to add servers to your Dokploy cluster
     -   **Server Name**: Give your server a meaningful name.
     -   **IP Address**: Enter the public IP address of the instance. If you’re using private networking, you can enter the private IP address instead.
     -   **SSH Key**: Select the previous created SSH key.
-    -   **Username**: The SSH user for connecting to the server, use `root`.
+    -   **Username**: The SSH user for connecting to the server, use `ubuntu`.
 4.  **Submit**:
     -   After filling out the necessary fields, click "Submit" to add the server.
 
