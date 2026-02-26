@@ -91,7 +91,15 @@ Note: **Reserved** Static IP does not change unless you release it. It stays in 
 
 Below are the key variables for deployment which are defined in `variables.tf`:
 
--   `ssh_authorized_keys`: Your SSH public key for accessing the instances.
+-   `ssh_authorized_keys`: One or more SSH public keys for accessing the instances. Accepts a list, so multiple keys can be provided for different client machines:
+    ```hcl
+    ssh_authorized_keys = [
+      "ssh-rsa AAAA...key1 laptop",
+      "ssh-rsa AAAA...key2 desktop",
+      "ssh-ed25519 AAAA...key3 workstation",
+    ]
+    ```
+    All keys are written to `/home/ubuntu/.ssh/authorized_keys` on every instance.
 -   `compartment_id`: OCI compartment ID for instance deployment.
 -   `num_worker_instances`: Number of worker instances to deploy for Dokploy.
 -   `availability_domain_main`: Availability domain for the main instance.
