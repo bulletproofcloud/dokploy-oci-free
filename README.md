@@ -31,7 +31,7 @@ For detailed information about the free tier, visit [OCI Free Tier](https://www.
 Before you begin, ensure you have the following:
 
 -   An Oracle Cloud Infrastructure (OCI) account with Free Tier resources available.
--   An SSH public key for accessing the instances.
+-   One or more SSH public keys for accessing the instances (one per client machine).
 
 ## Servers & Cluster
 
@@ -93,6 +93,7 @@ Below are the key variables for deployment which are defined in `variables.tf`:
 -   `num_worker_instances`: Number of worker instances to deploy for Dokploy.
 -   `availability_domain_main`: Availability domain for the main instance.
 -   `availability_domain_workers`: Availability domains for worker instances.
--   `instance_shape`: Instance shape (e.g., VM.Standard.E2.1.Micro) used for deployment.
--   `memory_in_gbs`: Memory size (GB) per instance.
--   `ocpus`: Number of OCPUs per instance.
+-   `instance_shape`: Instance shape used for deployment. Defaults to `VM.Standard.A1.Flex` (Ampere A1), which is OCI Always Free eligible.
+-   `memory_in_gbs`: Memory size (GB) per instance. To use the full Always Free allocation across all instances, set to `6` with the default of 4 instances (4 × 6 GB = 24 GB total, the Always Free ceiling).
+-   `ocpus`: Number of OCPUs per instance. To use the full Always Free allocation across all instances, set to `1` with the default of 4 instances (4 × 1 OCPU = 4 OCPUs total, the Always Free ceiling).
+-   `admin_cidr`: CIDR block allowed to access the Dokploy admin dashboard on port 3000. Defaults to `0.0.0.0/0` (open) — restrict to your IP before deploying, e.g. `"1.2.3.4/32"`.
