@@ -14,9 +14,9 @@ variable "source_image_id" {
 }
 
 variable "num_worker_instances" {
-  description = "Number of Dokploy worker instances to deploy. Max 3 for Always Free tier (3 workers + 1 main = 4 instances, 4 OCPUs, 24 GB total)."
+  description = "Number of Dokploy worker instances to deploy. Max 3 for Always Free tier. Default is 1 (1 main + 1 worker = 2 instances, 4 OCPUs, 24 GB total)."
   type        = number
-  default     = 3
+  default     = 1
 }
 
 variable "availability_domain_main" {
@@ -36,15 +36,15 @@ variable "instance_shape" {
 }
 
 variable "memory_in_gbs" {
-  description = "Memory in GBs per instance. At 6 GB with 4 instances (1 main + 3 workers), total is 24 GB — the Always Free ceiling."
+  description = "Memory in GBs per instance. At 12 GB with 2 instances (1 main + 1 worker), total is 24 GB — the Always Free ceiling."
   type        = string
-  default     = "6" # OCI Free
+  default     = "12" # OCI Free
 }
 
 variable "ocpus" {
-  description = "OCPUs per instance. At 1 OCPU with 4 instances (1 main + 3 workers), total is 4 OCPUs — the Always Free ceiling."
+  description = "OCPUs per instance. At 2 OCPUs with 2 instances (1 main + 1 worker), total is 4 OCPUs — the Always Free ceiling."
   type        = string
-  default     = "1" # OCI Free
+  default     = "2" # OCI Free
 }
 
 variable "admin_cidr" {
