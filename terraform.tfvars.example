@@ -43,12 +43,13 @@ ssh_authorized_keys = [
 admin_cidr = "0.0.0.0/0"
 
 # ------------------------------------------------------------------------------
-# Optional — defaults match OCI Always Free limits (1 main + 3 workers)
+# Optional — defaults use 2 × (2 OCPU, 12 GB) layout (1 main + 1 worker)
+# This uses the full Always Free allocation: 4 OCPUs and 24 GB total.
 # ------------------------------------------------------------------------------
 
-# Number of worker instances (max 3 to stay within Always Free: 4 total × 1 OCPU × 6 GB)
-# num_worker_instances = 3
+# Number of worker instances (max 3 to stay within Always Free limits)
+# num_worker_instances = 1
 
 # instance_shape = "VM.Standard.A1.Flex"
-# ocpus          = "1"
-# memory_in_gbs  = "6"
+# ocpus          = "2"
+# memory_in_gbs  = "12"
