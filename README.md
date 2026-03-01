@@ -39,10 +39,20 @@ Before you begin, ensure you have the following:
 
 To begin deploying applications, you need to add servers to your Dokploy cluster. A server in Dokploy is where your applications will be deployed and managed.
 
+#### Accessing the Dokploy Dashboard
+
+Port 3000 is not exposed to the internet. Access the dashboard securely via an SSH tunnel:
+
+```bash
+ssh -L 3000:localhost:3000 ubuntu@<main-ip>
+```
+
+Then open [http://localhost:3000](http://localhost:3000) in your browser. The tunnel must remain open while you use the dashboard.
+
 #### Steps to Add Servers:
 
 1.  **Login to Dokploy Dashboard**:
-    -   Access the Dokploy dashboard via the main instance's public IP address. You'll need to use the login credentials configured during setup.
+    -   Open the SSH tunnel above, then navigate to [http://localhost:3000](http://localhost:3000).
 1.  **Generate SSH Keys**:
     -   On the left-hand menu, click on "SSH Keys" and add your private and public SSH key to connect your server.
 2.  **Navigate to Servers Section**:
@@ -94,6 +104,5 @@ Below are the key variables for deployment which are defined in `variables.tf`:
 -   `availability_domain_main`: Availability domain for the main instance.
 -   `availability_domain_workers`: Availability domains for worker instances.
 -   `instance_shape`: Instance shape used for deployment. Defaults to `VM.Standard.A1.Flex` (Ampere A1), which is OCI Always Free eligible.
--   `memory_in_gbs`: Memory size (GB) per instance. To use the full Always Free allocation across all instances, set to `6` with the default of 4 instances (4 × 6 GB = 24 GB total, the Always Free ceiling).
--   `ocpus`: Number of OCPUs per instance. To use the full Always Free allocation across all instances, set to `1` with the default of 4 instances (4 × 1 OCPU = 4 OCPUs total, the Always Free ceiling).
--   `admin_cidr`: CIDR block allowed to access the Dokploy admin dashboard on port 3000. Defaults to `0.0.0.0/0` (open) — restrict to your IP before deploying, e.g. `"1.2.3.4/32"`.
+-   `memory_in_gbs`: Memory size (GB) per instance. Defaults to `12` (2 instances × 12 GB = 24 GB total, the Always Free ceiling).
+-   `ocpus`: Number of OCPUs per instance. Defaults to `2` (2 instances × 2 OCPUs = 4 OCPUs total, the Always Free ceiling).
