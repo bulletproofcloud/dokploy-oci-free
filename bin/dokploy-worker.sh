@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# Install OpenSSH server
-apt install -y openssh-server
+# Wait for apt lock to be released before running any package operations.
+# Cloud images run unattended-upgrades on first boot which holds the lock.
+while fuser /var/lib/dpkg/lock-frontend /var/lib/apt/lists/lock /var/lib/dpkg/lock >/dev/null 2>&1; do
+  sleep 5
+done
+
+# Install OpenSSH server and UFW
+apt-get install -y openssh-server ufw
 
 # Install Dokploy
 DOKPLOY_INSTALLER="$(mktemp)"
@@ -11,7 +17,7 @@ bash "$DOKPLOY_INSTALLER"
 rm -f "$DOKPLOY_INSTALLER"
 
 # Allow Docker Swarm traffic
-ufw allow 80,443,3000,996,7946,4789,2377/tcp
+ufw allow 80,443,996,7946,4789,2377/tcp
 ufw allow 7946,4789,2377/udp
 
 iptables -I INPUT 1 -p tcp --dport 2377 -j ACCEPT

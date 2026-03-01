@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# Install OpenSSH server
-apt install -y openssh-server
+# Wait for apt lock to be released before running any package operations.
+# Cloud images run unattended-upgrades on first boot which holds the lock.
+while fuser /var/lib/dpkg/lock-frontend /var/lib/apt/lists/lock /var/lib/dpkg/lock >/dev/null 2>&1; do
+  sleep 5
+done
+
+# Install OpenSSH server and UFW
+apt-get install -y openssh-server ufw
 
 # Install Dokploy
 DOKPLOY_INSTALLER="$(mktemp)"
