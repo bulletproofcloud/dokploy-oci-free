@@ -34,15 +34,6 @@ ssh_authorized_keys = [
 ]
 
 # ------------------------------------------------------------------------------
-# Security — important, set before deploying
-# ------------------------------------------------------------------------------
-
-# Restrict the Dokploy admin dashboard (port 3000) to your IP only
-# Find your public IP: curl ifconfig.me
-# Format: "1.2.3.4/32"
-admin_cidr = "0.0.0.0/0"
-
-# ------------------------------------------------------------------------------
 # Optional — defaults use 2 × (2 OCPU, 12 GB) layout (1 main + 1 worker)
 # This uses the full Always Free allocation: 4 OCPUs and 24 GB total.
 # ------------------------------------------------------------------------------

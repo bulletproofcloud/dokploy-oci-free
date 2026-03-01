@@ -44,17 +44,6 @@ resource "oci_core_security_list" "dokploy_security_list" {
   vcn_id         = oci_core_vcn.dokploy_vcn.id
   display_name   = "Dokploy Security List"
 
-  # Ingress Rules for Dokploy
-  ingress_security_rules {
-    protocol = "6" # TCP
-    source   = var.admin_cidr
-    tcp_options {
-      min = 3000
-      max = 3000
-    }
-    description = "Allow HTTP traffic for Dokploy admin dashboard on port 3000"
-  }
-
   # SSH
   ingress_security_rules {
     protocol = "6" # TCP
